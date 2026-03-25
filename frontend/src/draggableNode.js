@@ -1,8 +1,9 @@
 // draggableNode.js
 
-export const DraggableNode = ({ type, label }) => {
+export const DraggableNode = ({ type, label  , description }) => {
     const onDragStart = (event, nodeType) => {
       const appData = { nodeType }
+      console.log('Dragging node of type:', nodeType);
       event.target.style.cursor = 'grabbing';
       event.dataTransfer.setData('application/reactflow', JSON.stringify(appData));
       event.dataTransfer.effectAllowed = 'move';
@@ -20,13 +21,15 @@ export const DraggableNode = ({ type, label }) => {
           display: 'flex', 
           alignItems: 'center', 
           borderRadius: '8px',
-          backgroundColor: '#1C2536',
+          backgroundColor: "rgba(249, 168, 212, 0.9)",
           justifyContent: 'center', 
-          flexDirection: 'column'
+          flexDirection: 'column',
+          fontWeight: 400
         }} 
         draggable
       >
           <span style={{ color: '#fff' }}>{label}</span>
+          {/* <span style={{ color: '#fff', fontSize: '12px' }}>{description}</span> */}
       </div>
     );
   };
