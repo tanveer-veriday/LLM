@@ -1,18 +1,23 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { BaseNode } from "../components/baseNode.js";
 import { Textarea } from "../components/textarea.js";
+import { useUpdateNodeInternals } from "reactflow";
 
 export const TextNode = ({ id, data }) => {
   const [text, setText] = useState(data?.text || "{{input}}");
 
+  const updateNodeInternals = useUpdateNodeInternals(); // fixes the issue with flow edge not connecting  with the node points after dynamically adding new nodes
   // Extract variables like {{input}}
   const variables = useMemo(() => {
     const regex = /{{\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*}}/g;
     const matches = [...text.matchAll(regex)];
 
-    // Removes the duplicates
     return [...new Set(matches.map((match) => match[1]))];
   }, [text]);
+
+  useEffect(() => {
+    updateNodeInternals(id);
+  }, [variables, text, id]);
 
   return (
     <BaseNode
@@ -30,7 +35,6 @@ export const TextNode = ({ id, data }) => {
         onChange={(e) => setText(e.target.value)}
         placeholder="Enter text with {{variables}}"
       />
-
 
       {variables.length > 0 && (
         <div className="block mb-2.5 text-sm font-medium text-heading">
