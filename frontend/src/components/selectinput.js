@@ -3,7 +3,7 @@ export const SelectInput = ({ label, options = [] , onChange , value}) => {
     <div>
       <label
         for="s_id"
-        class="block mb-2.5 text-sm font-medium text-heading"
+        className="block mb-2.5 text-sm font-medium text-heading"
       >
         {label}
       </label>

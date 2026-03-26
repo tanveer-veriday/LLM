@@ -2,8 +2,8 @@
 // Displays the drag-and-drop UI
 // --------------------------------------------------
 
-import { useState, useRef, useCallback } from 'react';
-import ReactFlow, { Controls, Background, MiniMap } from 'reactflow';
+import { useState, useRef, useCallback, useEffect } from 'react';
+import ReactFlow, { Controls, Background, MiniMap, useNodes, useEdges } from 'reactflow';
 import { useStore } from './store';
 import { shallow } from 'zustand/shallow';
 import { InputNode } from './nodes/inputNode';
@@ -45,6 +45,16 @@ export const PipelineUI = () => {
       onConnect
     } = useStore(selector, shallow);
 
+
+    useEffect(() => {
+      console.log("Nodes and edges updated:");
+      console.log("Nodes:")  
+      console.log(nodes)
+        console.log("Edges:")
+        console.log(edges)
+
+    },[nodes , edges]);
+     
     const getInitNodeData = (nodeID, type) => {
       let nodeData = { id: nodeID, nodeType: `${type}` };
       return nodeData;
@@ -90,7 +100,7 @@ export const PipelineUI = () => {
 
     return (
         <>
-        <div ref={reactFlowWrapper} style={{width: '100wv', height: '70vh'}}>
+        <div ref={reactFlowWrapper} style={{width: '100vw', height: '70vh'}}>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}

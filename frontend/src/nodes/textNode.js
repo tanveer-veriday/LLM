@@ -10,7 +10,7 @@ export const TextNode = ({ id, data }) => {
     const regex = /{{\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*}}/g;
     const matches = [...text.matchAll(regex)];
 
-    // Remove duplicates
+    // Removes the duplicates
     return [...new Set(matches.map((match) => match[1]))];
   }, [text]);
 

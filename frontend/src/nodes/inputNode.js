@@ -18,6 +18,7 @@ export const InputNode = ({ id, data }) => {
       />
 
       <SelectInput
+        label="Type:"
         value={inputType}
         onChange={(e) => setInputType(e.target.value)}
         options={["Text", "File"]}

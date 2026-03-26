@@ -2,7 +2,7 @@ import { Handle, Position } from "reactflow";
 
 const nodeStyles = {
   container:
-    "w-56 h-full bg-pink-300 text-white rounded-2xl shadow-lg  border-3 border-gray-500 p-3 relative transition hover:shadow-xl",
+    "w-56min-h-[120px] bg-pink-300 text-white rounded-2xl shadow-lg  border-6 border-pink-300 p-3 relative transition hover:shadow-xl",
   title:
     "text-sm font-semibold mb-2 text-white text-center w-full border-b-2 border-pink-200 pb-2",
   description: "text-sm text-gray-100 leading-relaxed mt-1",
@@ -26,7 +26,7 @@ export const BaseNode = ({
           position={Position.Left}
           id={input}
           className="!bg-green-500 !w-3 !h-3"
-          style={{ top: (100 * (i + 1)) / 3 }}
+          style={{ top: `${((i + 1) * 100) / (inputs.length + 1)}%` }}
         />
       ))}
       <div className="flex  flex-col gap-2 space-y-2 text-xs">{children}</div>
@@ -37,7 +37,7 @@ export const BaseNode = ({
           position={Position.Right}
           id={output}
           className="!bg-green-500 !w-3 !h-3"
-          style={{ top: (100 * (i + 1)) / 3 }}
+          style={{ top: `${((i + 1) * 100) / (outputs.length + 1)}%` }}
         />
       ))}
     </div>
